@@ -7,10 +7,23 @@
 # 注意,算式本身不必合理,只需理会括号之间的逻辑是否合理
 
 
-def p_balance(str):
-    pass
+def p_balance(tem_str):
+    open_bracket = '([{'
+    close_bracket = ')]}'
+    tem_list = []
+    
+    for each in tem_str:
+        if each in open_bracket:
+            tem_list.append(open_bracket.index(each))
+        if each in close_bracket:
+            if len(tem_list) == 0:
+                return False
+            if tem_list.pop() != close_bracket.index(each):
+                return False
+    if len(tem_list) == 0:
+        return True
 
-
+    return False
 
 # Test case:
 if __name__ == '__main__':
