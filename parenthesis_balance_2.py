@@ -6,7 +6,19 @@
 # p_balance('()(()') == False
 # 注意,算式本身不必合理,只需理会括号之间的逻辑是否合理
 
-
+def balance_p_1(tem_str, idx, count):
+    if idx<0:
+        return False
+    if count >= len(tem_str):
+        return idx
+    i = tem_str[count]
+    if i == '(':
+        idx = balance_p(tem_str, idx+1, count+1)
+    if i == ')':
+        idx = balance_p(tem_str, idx-1, count+1)
+    if i not in "()":
+        idx = balance_p(tem_str, idx, count+1)
+    return idx == 0
 
 # 答案
 def p_balance(s, depth=0):
