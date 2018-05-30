@@ -53,3 +53,4 @@ if __name__ == '__main__':
     K = TTest(6)
     assert K(1) == 19, 'f3(f2(f1(f3(f2(f1(1)))))), (((1+1)*2)+3)+1)*2)+3 = 19'
     
+    print('all passed')
