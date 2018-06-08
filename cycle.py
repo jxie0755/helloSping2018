@@ -22,7 +22,22 @@ def cycle(f1, f2, f3):
 
 
     # 请作答
-    pass
+    
+    # 答案:
+    def FF(n):
+        def g(x):
+            i = 0
+            while i < n:
+                if i % 3 == 0:
+                    x = f1(x)
+                elif i % 3 == 1:
+                    x = f2(x)
+                elif i % 3 == 2:
+                    x = f3(x)
+                i += 1
+            return x
+        return g
+    return FF
 
 
 
