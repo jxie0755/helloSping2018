@@ -8,12 +8,14 @@ def has_sum(total, n, m):
     """
     # 请作答:
     # 提示
-    if:   # condition 1
-
-    elif: # condition 2
-
+    if total%m == 0: # condition 1_1
+        return True
+    elif total%n == 0: # condition 1_2
+        return True
+    elif total - n >= m: # condition 2
+        return has_sum(total-n, n, m)
     else:
-
+        return False
 
 
 
