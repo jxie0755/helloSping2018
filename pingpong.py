@@ -18,9 +18,22 @@
 # 请作答:
 def pingpong(n):
     """求这个数列的第n项"""
-    pass
-    
-    
+    def pingpong(idx):
+    a = 1
+    num = 0
+    for i in range(1, idx+1):
+        num += a
+        if i%7 == 0 or is_seven_in(idx):
+            a = -a
+    return num
+
+def is_seven_in(num):
+    while num > 0:
+        rem = num%10
+        num = num//10
+        if rem == 7:
+            return True
+    return False
 
 if __name__ == '__main__':
     assert pingpong(7) == 7, '7'
