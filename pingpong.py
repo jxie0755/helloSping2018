@@ -17,24 +17,56 @@
 
 # 请作答:
 
-def pingpong(n):
-    """求这个数列的第n项"""
-    def pingpong(idx):
-    a = 1
-    num = 0
-    for i in range(1, idx+1):
-        num += a
-        if i%7 == 0 or is_seven_in(idx):
-            a = -a
-    return num
+# def pingpong(n):
+#     """求这个数列的第n项"""
+#     def pingpong(idx):
+#     a = 1
+#     num = 0
+#     for i in range(1, idx+1):
+#         num += a
+#         if i%7 == 0 or is_seven_in(idx):
+#             a = -a
+#     return num
 
+def diff(n):
+        """Returns the difference between pingpong(n) and pingpong(n-1), which could only be 1 or -1
+        
+        这个函数是用递归找两个相邻数字之间的差值,确定是1还是-1
+        n为pingpong数列的序号
+        这样的话 pingpong(n) = pingpong(n-1) + diff(n)
+        """
+        if n == 1:
+            return 1
+        elif (n-1) % 7 == 0 or has_seven(n-1):
+            return -1 * diff(n-1)
+        else:
+            return diff(n-1)
+    
+    # 这里开始是定义pingpong序列了
+    if n == 1:
+        return 1  # 起始值为1
+    else:
+        return pingpong(n-1) + diff(n) # 之后每个数都是上一个数 +1 或者 -1
+
+
+# def is_seven_in(num):
+#     while num > 0:
+#         rem = num%10
+#         num = num//10
+#         if rem == 7:
+#             return True
+#     return False
+
+# 递归版本is_seven_in
 def is_seven_in(num):
-    while num > 0:
-        rem = num%10
-        num = num//10
-        if rem == 7:
-            return True
-    return False
+    if num % 10 == 7:
+        return True
+    elif num < 10:
+        return False
+    else:
+        return has_seven(num // 10)
+
+
 
 if __name__ == '__main__':
     assert pingpong(7) == 7, '7'
