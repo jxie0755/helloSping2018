@@ -14,6 +14,16 @@ def make_change(n, a, b):
     注意: 手上必有1块的面值, 为确保能找得开
     """
     # your code:
+    A,B,C = 1000,1000,1000
+    if n == 0:
+        return 0
+    if n >= a:
+        A = make_change(n-a,a,b) + 1
+    if n>= b:
+        B = make_change(n-b,a,b) + 1
+    if n>=1:
+        C = make_change(n-1,a,b) + 1
+    return min(A, B, C)
 
 
 if __name__ == '__main__':
