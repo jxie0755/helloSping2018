@@ -26,3 +26,4 @@ if __name__ == '__main__':
     assert str(start.next().next().next().next()) == '3'
     assert str(start.next().next().next().next().next()) == '5'
     assert str(start.next().next().next().next().next().next()) == '8'
+    print('all passed')
