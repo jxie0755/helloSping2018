@@ -11,7 +11,14 @@ class Fib():
 
     def next(self):
         # your code:
-        pass
+        next_fib = Fib()
+        if self.value==0:
+            next_fib.value = 1
+            next_fib.prev = 0
+        else:
+            next_fib.prev = self.value
+            next_fib.value = self.value+self.prev
+        return next_fib
 
     def __repr__(self):
         return str(self.value)
