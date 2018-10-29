@@ -13,6 +13,16 @@ def flat_list(nested_list):
     recursion(nested_list)
     return flated_list
 
+# 去掉内部rec()的方法
+def flat_list(nested_list):
+    flattened_list = []
+    for i in nested_list:
+        if type(i) == list:
+            flattened_list += flat_list(i)
+        else:
+            flattened_list.append(i)
+    return flattened_list
+
 
 if __name__ == '__main__':
     assert flat_list([1, 2, 3]) == [1, 2, 3], "First"
