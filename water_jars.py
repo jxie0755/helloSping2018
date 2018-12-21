@@ -1,3 +1,5 @@
+# https://py.checkio.org/mission/water-jars/
+
 # Each action is described as a string of two symbols: from and to. The jars are marked as 1 and 2, the lake is marked 0. If you want to take water from the lake and fill first jar, then it's "01". To pour water from second jar into the first would be "21". Dump water out of the first jar and back into the lake would be "10". When you fill a jar from the lake, that jars volume will be full. When you pour water out a jar and into the lake, that jars volume will be empty. If you pour water from one jar to another, you can only pour as much as will fill the full volume of the receiving jar.
 
 
@@ -11,14 +13,12 @@
 # 灌水倒水一共只有六种动作
 # 终结条件,重复出现两瓶子的水量
 
-
-
-
 from copy import deepcopy
 
 def checkio(first, second, goal):
 
-    current = [[0, 0]]  # water in [first, second]
+    current = ['00', [0, 0]]
+    # first string represent action, second represent water in [first, second]
 
     methods = ['01', '02', '12', '21', '10', '20'] # '0' is the lake
     # The string '01' reprenst from lake to first jar, same applies to the other strings '
@@ -61,23 +61,28 @@ def checkio(first, second, goal):
     def move(lst):
         new_method_list = []
         for i in lst:
-            for method in methods:
-                new_status = process(i, method)
-                if new_status not in i:
-                    new_i = deepcopy(i) + [new_status]
-                    new_method_list.append(new_i)
-                    if goal in new_status:
-                        result.append(new_i)
+            if type(i) == list:
+                for method in methods:
+                    new_status = process(i, method)
+                    if new_status not in i:
+                        new_i = deepcopy(i) + [new_status]
+                        new_i[0] += method
+                        new_method_list.append(new_i)
+                        if goal in new_status:
+                            result.append(new_i)
         return new_method_list
 
-    while result == []:
+    while not result and temp_method_list:
         temp_method_list = move(temp_method_list)
 
-    print(result)
+    if result:
+        return result[0]
+    else:
+        return 'Not possible'
 
 
 
-checkio(5, 7, 6)
-# ['02', '21', '10', '21', '02', '21', '10', '21', '02', '21']   # 这是要求的结果
-#这是目前我的输出
-# [[[0, 0], [0, 7], [5, 2], [0, 2], [2, 0], [2, 7], [5, 4], [0, 4], [4, 0], [4, 7], [5, 6]]]
+if __name__ == '__main__':
+    assert checkio(5, 7, 6) == ['0002211021022110210221', [0, 0], [0, 7], [5, 2], [0, 2], [2, 0], [2, 7], [5, 4], [0, 4], [4, 0], [4, 7], [5, 6]]
+    assert checkio(4, 8, 3) == 'Not possible'
+    print('all passed')
