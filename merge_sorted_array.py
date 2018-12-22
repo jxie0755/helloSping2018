@@ -17,7 +17,16 @@ def merge(nums1, m, nums2, n):
     :rtype: void Do not return anything, modify nums1 in-place instead.
     """
     # your code:
-
+    cur = 0
+    tmp_n= 0
+    for j in nums2:
+        while j>=nums1[cur] and cur < m+tmp_n:
+            cur += 1
+        nums1.insert(cur, j)
+        tmp_n += 1
+        nums1.pop()
+    for i in range(m+n,len(nums1)):
+        nums1[i] = 0
 
 if __name__ == '__main__':
     nums1 = [1]
