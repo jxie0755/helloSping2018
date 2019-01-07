@@ -1,0 +1,15 @@
+class Solution(object):
+    def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        tmp_lst = {}
+        for idx in range(0,len(numbers)):
+            if numbers[idx] not in tmp_lst.keys():
+                tmp_lst[target-numbers[idx]]=idx
+            else:
+                return [tmp_lst[numbers[idx]]+1,idx+1]
+                
+     
